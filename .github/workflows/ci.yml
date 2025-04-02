@@ -23,7 +23,7 @@ jobs:
 
     steps:
     - name: Checkout 
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         submodules: 'recursive'
 
@@ -33,9 +33,9 @@ jobs:
         msbuild-architecture: ${{matrix.platform}}
 
     - name: Build
-      run: msbuild /m /property:Configuration=Release /property:Platform=${{matrix.platform}}
+      run: msbuild /m /property:Configuration=Debug /property:Platform=${{matrix.platform}}
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       if: github.ref == 'refs/heads/master'
       with:
         name: ${{matrix.platform}}
@@ -50,7 +50,7 @@ jobs:
     steps:
     - name: Download Artifacts
       id: download
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         path: artifacts
     
